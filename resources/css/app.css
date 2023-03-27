@@ -1,0 +1,122 @@
+@keyframes spinner-line-fade-more {
+    0%, 100% {
+        opacity: 0; /* minimum opacity */
+    }
+    1% {
+        opacity: 1;
+    }
+}
+
+@keyframes spinner-line-fade-quick {
+    0%, 39%, 100% {
+        opacity: 0.25; /* minimum opacity */
+    }
+    40% {
+        opacity: 1;
+    }
+}
+
+@keyframes spinner-line-fade-default {
+    0%, 100% {
+        opacity: 0.22; /* minimum opacity */
+    }
+    1% {
+        opacity: 1;
+    }
+}
+
+@keyframes spinner-line-shrink {
+    0%, 25%, 100% {
+        /* minimum scale and opacity */
+        transform: scale(0.5);
+        opacity: 0.25;
+    }
+    26% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.select2.error {
+    border: 1px dotted #cc5965;
+}
+
+.swal2-container{
+    z-index: 2060;
+}
+
+.img-48 {
+    width: 48px;
+    height: 48px;
+}
+
+.table-list table tr td, .table-list table tr th {
+    vertical-align: middle;
+}
+
+.width-zero {
+    width: 0;
+}
+
+.button-default[disabled="disabled"] {
+    pointer-events: none;
+    cursor: default !important;
+}
+
+a.maximize i{
+    width: 12px;
+}
+
+b.required {
+    color: #cc5965;
+}
+
+small.error {
+    color: #cc5965;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.disable-select-text {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-button {
+
+}
+
+::-webkit-scrollbar-track {
+
+}
+
+::-webkit-scrollbar-track-piece {
+
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #bdbdbd;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-corner {
+
+}
+
+::-webkit-resizer {
+
+}

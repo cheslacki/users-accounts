@@ -2,16 +2,30 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Illuminate\Http\Request;
+use App\Helpers\AuthHelper;
+use Closure;
+use Illuminate\Support\Facades\Redirect;
 
-class Authenticate extends Middleware
+/**
+ * Class Authenticate
+ * @package App\Http\Middleware
+ */
+class Authenticate
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
+     * @param \Illuminate\Http\Request $request
+     * @param Closure $next
+     * @return \Illuminate\Http\RedirectResponse|mixed
      */
-    protected function redirectTo(Request $request): ?string
+    public function handle($request, Closure $next)
     {
-        return $request->expectsJson() ? null : route('login');
+        /** @var object $current_user */
+        $current_user = AuthHelper::getCurrentUser();
+
+        if ($current_user && $current_user->hasVerifiedEmail()) {
+            return $next($request);
+        }
+
+        return Redirect::route('login');
     }
 }

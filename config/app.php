@@ -69,7 +69,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    //'timezone' => 'UTC',
+    'timezone' => 'America/Sao_Paulo',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +83,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    //'locale' => 'en',
+    'locale' => 'pt',
 
     /*
     |--------------------------------------------------------------------------
@@ -195,6 +197,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /* New Application */
+        Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*
@@ -210,6 +215,16 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+
+        /* New Application */
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'MenuHelper' => App\Helpers\MenuHelper::class,
+        'AuthHelper' => App\Helpers\AuthHelper::class,
+        'FormatHelper' => App\Helpers\FormatHelper::class,
+        'InfoHelper' => App\Helpers\InfoHelper::class,
+        'QueryHelper' => App\Helpers\QueryHelper::class,
+
     ])->toArray(),
 
 ];
