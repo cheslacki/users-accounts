@@ -97,9 +97,11 @@ class HelpersAction extends HelpersController {
                         done: (response) => {
                             if (this.verifyField(response, 'data.status', false, false)) {
 
+                                console.log(response);
+
                                 Swal.fire({
-                                    title: 'Success!',
-                                    text: 'Press ok to continue',
+                                    title: this.verifyField(response, 'data.message.title', false, 'Success!'),
+                                    text: this.verifyField(response, 'data.message.text', false, 'Press ok to continue'),
                                     icon: 'success',
                                     showConfirmButton: true,
                                     confirmButtonText: 'OK',
@@ -152,9 +154,22 @@ class HelpersAction extends HelpersController {
             });
         };
 
+        /**
+         *
+         * @param event
+         */
+        const executeErase = (event) => {
+            this.formErase(event, $elements);
+        };
+
         if (!!$elements && Boolean($elements.length)) {
             $elements.off('click.form-user-button-submit', '.button-submit');
             $elements.on('click.form-user-button-submit', '.button-submit', executeSubmit);
+        }
+
+        if (!!$elements && Boolean($elements.length)) {
+            $elements.off('click.form-user-button-submit', '.button-erase');
+            $elements.on('click.form-user-button-submit', '.button-erase', executeErase);
         }
     };
 
@@ -280,6 +295,16 @@ class HelpersAction extends HelpersController {
             $elements.off('click.list-table-actions-delete', '.actions .delete');
             $elements.on('click.list-table-actions-delete', '.actions .delete', execute);
         }
+    };
+
+    /**
+     *
+     * @param event
+     * @param $elements
+     */
+    formErase = (event, $elements) => {
+        this.stopPropagation(event);
+        $elements.find(':input:not([name=_token])').val('');
     };
 }
 

@@ -32,6 +32,10 @@ use App\Http\Controllers\System\Admin\User\UsersController as AdminUsersControll
 
 Route::view('/404', 'errors.404')->name('404');
 
+Route::get('/', function () {
+    return redirect('/login');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Unauthenticated

@@ -37,7 +37,7 @@
             {{ Form::button(__('button.search'), ['type' => 'submit', 'class' => 'btn btn-primary btn-block']) }}
         </div>
         <div class="col mx-1 mb-2">
-            {{ Html::link(route('admin.users'), __('button.erase'), ['class' => 'btn btn-primary btn-block']) }}
+            {{ Html::link(route('admin.users'), __('button.erase'), ['class' => 'btn btn-primary btn-block button-erase']) }}
         </div>
         <div class="col mx-1 mb-2">
             {{ Html::link(route('admin.user'), __('button.new'), ['class' => 'btn btn-primary btn-block']) }}

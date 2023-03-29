@@ -57,7 +57,7 @@
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    @if(!isset($query->id) && empty($query->id))
+                                                    @if(!isset($query->id))
                                                         {{ Form::label('user_password', '<b class="required">*</b>&nbsp;' . __('label.password'), [], false) }}
                                                     @else
                                                         {!! Form::label('user_password', __('label.password')) !!}
@@ -67,7 +67,7 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    @if(!isset($query->id) && empty($query->id))
+                                                    @if(!isset($query->id))
                                                         {{ Form::label('user_password_confirm', '<b class="required">*</b>&nbsp;' . __('label.confirm_password'), [], false) }}
                                                     @else
                                                         {!! Form::label('user_password_confirm', __('label.confirm_password')) !!}
@@ -90,9 +90,9 @@
                                 <div class="nav-item mx-1">
                                     {{ Form::button(__('button.save'), ['type' => 'submit', 'class' => 'btn btn-primary button-submit']) }}
                                 </div>
-                                @if(!isset($query->id) && empty($query->id))
+                                @if(!isset($query->id))
                                     <div class="nav-item mx-1">
-                                        {{ Html::link(route('admin.user'), __('button.erase'), ['class' => 'btn btn-light button-default']) }}
+                                        {{ Html::link('#', __('button.erase'), ['class' => 'btn btn-light button-erase']) }}
                                     </div>
                                 @endif
                                 <div class="nav-item mx-1">
