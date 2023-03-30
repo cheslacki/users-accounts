@@ -112,7 +112,13 @@ class UsersController extends Controller
      */
     public function getUsers(Request $request)
     {
+        $request->flash();
+
         $params['filter'] = $request->query('filter');
+
+        $sort = $field_sort = CheckHelper::getNotEmpty($request, 'filter', ['sort'], false);
+
+        $field_order = CheckHelper::getNotEmpty($request, 'filter', ['order'], false);
 
         $field_name = CheckHelper::getNotEmpty($request, 'filter', ['name'], false);
 
@@ -134,7 +140,15 @@ class UsersController extends Controller
             });
         }
 
-        $query = $query->paginate(2);
+        $order = ($field_order == 'desc') ? 'asc' : 'desc';
+
+        if ($field_sort) {
+            $query->orderBy("users.{$sort}", $order);
+        } else {
+            $query->orderBy('users.created_at', 'desc');
+        }
+
+        $query = $query->paginate(10);
 
         $params = FormatHelper::arrayToParams($params);
 
@@ -145,7 +159,7 @@ class UsersController extends Controller
         $page = 'user.list.users';
         $title = __('title.users');
         $link = __('link.all_users');
-        return view('system.admin.index', compact('page', 'title', 'link', 'query'));
+        return view('system.admin.index', compact('page', 'title', 'link', 'query', 'order', 'sort'));
     }
 
     /**
@@ -249,6 +263,13 @@ class UsersController extends Controller
     public function deleteUser($id = null)
     {
         try {
+            /** @var object $current_user */
+            $current_user = $this->getCurrentUser();
+
+            if($current_user && ($current_user->id == $id)){
+                throw new Exception(__('Error, you cannot delete your user.'));
+            }
+
             $this->setId($id);
 
             $this->delete();

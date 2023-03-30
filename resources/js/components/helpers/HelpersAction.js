@@ -23,6 +23,7 @@ class HelpersAction extends HelpersController {
         super(props);
         jQuery(document).ready(() => {
             Boolean(props.lineView) && this.lineView();
+            Boolean(props.lineDisabled) && this.lineDisabled();
             Boolean(props.lineDelete) && this.lineDelete();
             Boolean(props.formLogin) && this.formLogin();
             Boolean(props.formUser) && this.formUser();
@@ -198,6 +199,15 @@ class HelpersAction extends HelpersController {
         }
     };
 
+    lineDisabled = () => {
+        const $elements = jQuery('.sheet-content .list-table');
+
+        if (!!$elements && Boolean($elements.length)) {
+            $elements.off('click.list-table-actions-disabled', '.actions .disabled');
+            $elements.on('click.list-table-actions-disabled', '.actions .disabled', this.stopPropagation);
+        }
+    };
+
     lineDelete = () => {
         const $elements = jQuery('.sheet-content .list-table');
 
@@ -295,6 +305,11 @@ class HelpersAction extends HelpersController {
             $elements.off('click.list-table-actions-delete', '.actions .delete');
             $elements.on('click.list-table-actions-delete', '.actions .delete', execute);
         }
+
+        if (!!$elements && Boolean($elements.length)) {
+            $elements.off('click.list-table-actions-delete', '.actions .disable');
+            $elements.on('click.list-table-actions-delete', '.actions .disable', this.stopPropagation);
+        }
     };
 
     /**
@@ -311,6 +326,7 @@ class HelpersAction extends HelpersController {
 const config = {
     default: {
         lineView: false,
+        lineDisabled: false,
         lineDelete: false,
         formUser: false,
         formLogin: false

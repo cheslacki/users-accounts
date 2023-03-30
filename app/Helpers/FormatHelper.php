@@ -108,4 +108,20 @@ class FormatHelper extends Helper
 
         return implode('&', $params);
     }
+
+    /**
+     * @param $field
+     * @param $order
+     * @return mixed
+     */
+    public static function filterLink($field, $order)
+    {
+        if (request()->has('filter')) {
+            $filter = request()->get('filter');
+        } else {
+            $filter = [];
+        }
+
+        return request()->fullUrlWithQuery(['filter' => array_merge($filter, ['sort' => $field, 'order' => $order])]);
+    }
 }

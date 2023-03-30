@@ -5,6 +5,8 @@
      * Date: 26/03/2023
      * Time: 12:20
      */
+
+    $current_user = AuthHelper::getCurrentUser();
 @endphp
 
 <table class="table table-striped table-hover">
@@ -23,11 +25,31 @@
             {{ Form::checkbox('action[checkbox][all_top]', null, null, ['id' => 'checkbox_all_top']) }}
         </th>
         <th class="width-zero"></th>
-        <th>@lang('table.name')</th>
-        <th>@lang('table.login')</th>
-        <th>@lang('table.status')</th>
-        <th>@lang('table.created')</th>
-        <th>@lang('table.updated')</th>
+        <th>
+            <a href="{{ FormatHelper::filterLink('name', $order) }}">
+                <i class="fa {{ $sort == 'name' ? ($order == 'desc' ? 'fa-sort-asc' : 'fa-sort-desc') : 'fa-sort' }}"></i>&nbsp;@lang('table.name')
+            </a>
+        </th>
+        <th>
+            <a href="{{ FormatHelper::filterLink('email', $order) }}">
+                <i class="fa {{ $sort == 'email' ? ($order == 'desc' ? 'fa-sort-asc' : 'fa-sort-desc') : 'fa-sort' }}"></i>&nbsp;@lang('table.login')
+            </a>
+        </th>
+        <th>
+            <a href="{{ FormatHelper::filterLink('active', $order) }}">
+                <i class="fa {{ $sort == 'active' ? ($order == 'desc' ? 'fa-sort-asc' : 'fa-sort-desc') : 'fa-sort' }}"></i>&nbsp;@lang('table.status')
+            </a>
+        </th>
+        <th>
+            <a href="{{ FormatHelper::filterLink('created_at', $order) }}">
+                <i class="fa {{ $sort == 'created_at' ? ($order == 'desc' ? 'fa-sort-asc' : 'fa-sort-desc') : 'fa-sort' }}"></i>&nbsp;@lang('table.created')
+            </a>
+        </th>
+        <th>
+            <a href="{{ FormatHelper::filterLink('updated_at', $order) }}">
+                <i class="fa {{ $sort == 'updated_at' ? ($order == 'desc' ? 'fa-sort-asc' : 'fa-sort-desc') : 'fa-sort' }}"></i>&nbsp;@lang('table.updated')
+            </a>
+        </th>
         <th class="width-zero"></th>
     </tr>
     </thead>
@@ -59,9 +81,15 @@
             <td class="text-nowrap">
                 {!! ((isset($value->updated_at) && !empty($value->updated_at)) ?  e($value->updated_at->format('d/m/Y H:i')) : __('text.default')) !!}
             </td>
-            <td class="actions">
-                {{ Form::button(Html::tag('i', '', ['class' => 'fa fa-trash text-danger']), ['type' => 'button', 'class' => 'btn btn-white delete']) }}
-            </td>
+            @if(isset($current_user->id) && ($current_user->id != $value->id))
+                <td class="actions">
+                    {{ Form::button(Html::tag('i', '', ['class' => 'fa fa-trash text-danger']), ['type' => 'button', 'class' => 'btn btn-white delete']) }}
+                </td>
+            @else
+                <td class="actions">
+                    {{ Form::button(Html::tag('i', '', ['class' => 'fa fa-trash text-muted']), ['type' => 'button', 'class' => 'btn btn-white disabled']) }}
+                </td>
+            @endif
         </tr>
     @empty
         <tr class="text-center">

@@ -9,6 +9,7 @@ import {
 
 HelpersAction({
     lineView: true,
+    lineDisabled: true,
     lineDelete: true,
     formLogin: true,
     formUser: true
