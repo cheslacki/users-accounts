@@ -28,6 +28,15 @@ class HelpersAction extends HelpersController {
             Boolean(props.formLogin) && this.formLogin();
             Boolean(props.formUser) && this.formUser();
         });
+        this.default_swal_config = {
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+            buttonsStyling: false,
+            customClass: {
+                container: 'swal2-container',
+                confirmButton: 'btn btn-primary mx-1',
+            }
+        };
     };
 
     formLogin = () => {
@@ -97,23 +106,14 @@ class HelpersAction extends HelpersController {
                         },
                         done: (response) => {
                             if (this.verifyField(response, 'data.status', false, false)) {
-
-                                console.log(response);
-
                                 Swal.fire({
                                     title: this.verifyField(response, 'data.message.title', false, 'Success!'),
                                     text: this.verifyField(response, 'data.message.text', false, 'Press ok to continue'),
                                     icon: 'success',
-                                    showConfirmButton: true,
-                                    confirmButtonText: 'OK',
-                                    buttonsStyling: false,
+                                    ...this.default_swal_config,
                                     allowOutsideClick: false,
                                     allowEscapeKey: false,
                                     allowEnterKey: false,
-                                    customClass: {
-                                        container: 'swal2-container',
-                                        confirmButton: 'btn btn-primary mx-1'
-                                    },
                                     willOpen: (element) => {
                                         /* Element swal, for modify or others */
                                     },
@@ -251,9 +251,9 @@ class HelpersAction extends HelpersController {
                                     },
                                     done: (response) => {
                                         if (this.verifyField(response, 'data.status', false, false)) {
-                                            resolve();
+                                            resolve(this.verifyField(response, 'data.message', false, null));
                                         } else {
-                                            reject(this.verifyField(response, 'data.message.text', false, 'Something went wrong.'));
+                                            reject(this.verifyField(response, 'data.message', false, null));
                                         }
                                     },
                                     fail: (response) => {
@@ -269,16 +269,10 @@ class HelpersAction extends HelpersController {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire({
-                            title: 'Success!',
-                            text: 'Press ok to close',
+                            title: this.verifyField(result, 'value.title', false, 'Success!'),
+                            text: this.verifyField(result, 'value.text', false, 'Press ok to close'),
                             icon: 'success',
-                            showConfirmButton: true,
-                            confirmButtonText: 'OK',
-                            buttonsStyling: false,
-                            customClass: {
-                                container: 'swal2-container',
-                                confirmButton: 'btn btn-primary mx-1',
-                            },
+                            ...this.default_swal_config,
                             preConfirm: () => {
                                 window.location.reload();
                             }
@@ -286,16 +280,10 @@ class HelpersAction extends HelpersController {
                     }
                 }).catch(error => {
                     Swal.fire({
-                        title: 'Error!',
-                        text: error,
+                        title: this.verifyField(error, 'title', false, 'Error!'),
+                        text: this.verifyField(error, 'text', false, 'Something went wrong.'),
                         icon: 'error',
-                        showConfirmButton: true,
-                        confirmButtonText: 'OK',
-                        buttonsStyling: false,
-                        customClass: {
-                            container: 'swal2-container',
-                            confirmButton: 'btn btn-primary mx-1',
-                        }
+                        ...this.default_swal_config
                     });
                 })
             }

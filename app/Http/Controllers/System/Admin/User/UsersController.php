@@ -40,7 +40,7 @@ class UsersController extends Controller
         if ($this->setObject($user)) {
             $this->setId($user->id);
         } else {
-            throw new Exception(__('Error, create.'));
+            throw new Exception(__('message.error_create'));
         }
     }
 
@@ -54,7 +54,7 @@ class UsersController extends Controller
         if ($user && $user->update($this->getDataArray())) {
             $this->setObject($user);
         } else {
-            throw new Exception(__('Error, update.'));
+            throw new Exception(__('message.error_update'));
         }
     }
 
@@ -77,7 +77,7 @@ class UsersController extends Controller
                 $user->delete();
             }
         } else {
-            throw new Exception(__('Error, absence id.'));
+            throw new Exception(__('message.error_id'));
         }
     }
 
@@ -267,7 +267,7 @@ class UsersController extends Controller
             $current_user = $this->getCurrentUser();
 
             if($current_user && ($current_user->id == $id)){
-                throw new Exception(__('Error, you cannot delete your user.'));
+                throw new Exception(__('message.error_delete_your_user'));
             }
 
             $this->setId($id);

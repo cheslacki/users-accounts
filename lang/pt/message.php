@@ -20,5 +20,10 @@ return [
     'success_title' => 'Salvo',
     'success_text' => 'Suas alterações foram salvas.',
     'not_register' => 'Não há registros.',
-    'deleted_text' => 'Excluído com sucesso.'
+    'deleted_title' => 'Excluído',
+    'deleted_text' => 'Excluído com sucesso.',
+    'error_create' => 'Erro, criação.',
+    'error_update' => 'Erro, atualização.',
+    'error_id' => 'Erro, id ausente.',
+    'error_delete_your_user' => 'Erro, você não pode excluir seu usuário.'
 ];

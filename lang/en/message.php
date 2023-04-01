@@ -20,5 +20,10 @@ return [
     'success_title' => 'Save',
     'success_text' => 'Your changes have been saved.',
     'not_register' => 'There are no records.',
-    'deleted_text' => 'Successfully deleted.'
+    'deleted_title' => 'Deleted',
+    'deleted_text' => 'Successfully deleted.',
+    'error_create' => 'Error, create.',
+    'error_update' => 'Error, update.',
+    'error_id' => 'Error, absence id.',
+    'error_delete_your_user' => 'Error, you cannot delete your user.'
 ];
